@@ -28,6 +28,34 @@ public class ConvexHull implements Iterable<Point> {
 		return convex.iterator();
 	}
 
+	public ConvexIterator getListIteratorAt(int index) {
+		return new ConvexIterator(index);
+	}
+
+	public class ConvexIterator {
+		private int index;
+
+		public ConvexIterator(int index) {
+			this.index = index;
+		}
+
+		public void next() {
+			index++;
+			if (index == size())
+				index = 0;
+		}
+
+		public void previous() {
+			index--;
+			if (index == -1)
+				index = size() - 1;
+		}
+
+		public Point get() {
+			return convex.get(index);
+		}
+	}
+
 	/**
 	 * Use quick hull method to solve this problem. Divide-and-conquer. Divide
 	 * set into two parts by an exteme line and run the same algorithm on two
@@ -124,14 +152,14 @@ public class ConvexHull implements Iterable<Point> {
 		String name = in.nextLine();
 		List<Point> points = readPoints("input/" + name + ".txt");
 		System.out.println("successfully import " + points.size() + " points from " + name + ".txt");
-	
+
 		// solve the problem and record the time elapsed.
 		long time = System.nanoTime();
 		System.out.print("Quick hull method");
 		ConvexHull convex = new ConvexHull(points);
 		long t = System.nanoTime() - time;
 		System.out.println(" produces " + convex.size() + " vertice convex hull in " + t / 1000000.0 + " milliseconds");
-	
+
 		// display the result in frame.
 		ConvexHullFrame display = new ConvexHullFrame(points);
 		display.drawConvex(convex, convex.size());

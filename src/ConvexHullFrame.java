@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Arc2D;
-import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
