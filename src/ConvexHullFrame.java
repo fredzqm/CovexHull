@@ -13,6 +13,10 @@ import javax.swing.JFrame;
  *
  */
 public class ConvexHullFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	static final int Width = 1000;
 	static final int Height = 800;
 	double point_d;
@@ -69,6 +73,11 @@ public class ConvexHullFrame extends JFrame {
 	 * @author FredZhang
 	 */
 	private class Canvas extends JComponent {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		@Override
 		protected void paintComponent(Graphics g) {

@@ -15,6 +15,10 @@ import javax.swing.JFrame;
  *
  */
 public class Plot extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static double[][] data = {
 			{ 25, 250, 1250, 2500, 5000, 10000, 25000, 100000, 200000, 500000 },
 			{ 2.8388, 20.3193, 136.7920, 249.6994, 954.1295, 3535.0032,
@@ -91,6 +95,11 @@ public class Plot extends JFrame {
 	}
 
 	class Canvas extends JComponent {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		@Override
 		public void paintComponent(Graphics g) {
