@@ -21,7 +21,7 @@ public class ConvexHull {
 		System.out.println("Input file name?");
 		Scanner in = new Scanner(System.in);
 		String name = in.nextLine();
-		Scanner file = new Scanner(new File(name + ".txt"));
+		Scanner file = new Scanner(new File("input/" + name + ".txt"));
 		while (file.hasNextLine()) {
 			String line = file.nextLine();
 			String[] s = line.split(", ");
@@ -36,14 +36,13 @@ public class ConvexHull {
 				points.add(new Point(x, y));
 			}
 		}
-		System.out.println("successfully import " + points.size()
-				+ " points from " + name + ".txt");
+		System.out.println("successfully import " + points.size() + " points from " + name + ".txt");
 
 		// choose the method
 		int choice = 0;
 		while (true) {
-			System.out
-					.println("Please choose the method for finding convexHull (1.brutal force; 2.improved brutal force; 3.quickhull alogrithm)");
+			System.out.println(
+					"Please choose the method for finding convexHull (1.brutal force; 2.improved brutal force; 3.quickhull alogrithm)");
 			try {
 				choice = in.nextInt();
 			} catch (InputMismatchException e) {
@@ -67,12 +66,11 @@ public class ConvexHull {
 			convex = QuickHull.run(points);
 		}
 		long t = System.nanoTime() - time;
-		System.out.println(" produces " + convex.size()
-				+ " vertice convex hull in " + t / 1000000.0 + " milliseconds");
+		System.out.println(" produces " + convex.size() + " vertice convex hull in " + t / 1000000.0 + " milliseconds");
 
 		// display the result in frame.
-		 ConvexHullFrame display = new ConvexHullFrame(points);
-		 display.drawConvex(convex);
+		ConvexHullFrame display = new ConvexHullFrame(points);
+		display.drawConvex(convex);
 	}
 
 	static class QuickHull {
@@ -128,8 +126,7 @@ public class ConvexHull {
 		 * @param p2
 		 * @return all vertece on the right side of P1P2
 		 */
-		private static List<Point> VerticeOnRight(List<Point> points,
-				Point p1, Point p2) {
+		private static List<Point> VerticeOnRight(List<Point> points, Point p1, Point p2) {
 			List<Point> m = new ArrayList<Point>();
 			int a = p2.y - p1.y;
 			int b = p1.x - p2.x;
@@ -220,8 +217,7 @@ public class ConvexHull {
 		 * @return a valid vertex of the covex hull found in this search, null
 		 *         if none if found.
 		 */
-		private static Point nextVertix(List<Point> points, Point cur,
-				Point guess) {
+		private static Point nextVertix(List<Point> points, Point cur, Point guess) {
 			if (cur.equals(guess))
 				return null;
 			int a = cur.y - guess.y;
