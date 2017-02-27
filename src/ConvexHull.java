@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -62,15 +63,11 @@ public class ConvexHull {
 		 * @param points
 		 * @return
 		 */
-		private static List<Point> run(List<Point> points) {
-			// get the left-most and right-most points in the set, the first two
-			// vertex in convex.
-			int min = points.get(0).x;
-			Point minP = points.get(0);
-			int max = points.get(0).x;
-			Point maxP = points.get(0);
-			for (int i = 1; i < points.size(); i++) {
-				Point p = points.get(i);
+		private static List<Point> run(Collection<Point> points) {
+			// get the left-most and right-most points in the set
+			int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+			Point minP = null, maxP = null;
+			for (Point p : points) {
 				if (p.x < min) {
 					min = p.x;
 					minP = p;
@@ -86,16 +83,14 @@ public class ConvexHull {
 						maxP = p;
 				}
 			}
-			Point p1 = minP;
-			Point p2 = maxP;
 
-			// recursivley call helper method, and concanate all vertece
+			// recursively call helper method, and concatanate all vertice
 			// together in order.
 			List<Point> conv = new ArrayList<Point>();
-			conv.add(p1);
-			conv.addAll(VerticeOnRight(points, p1, p2));
-			conv.add(p2);
-			conv.addAll(VerticeOnRight(points, p2, p1));
+			conv.add(minP);
+			conv.addAll(VerticeOnRight(points, minP, maxP));
+			conv.add(maxP);
+			conv.addAll(VerticeOnRight(points, maxP, minP));
 			return conv;
 		}
 
@@ -106,7 +101,7 @@ public class ConvexHull {
 		 * @param p2
 		 * @return all vertece on the right side of P1P2
 		 */
-		private static List<Point> VerticeOnRight(List<Point> points, Point p1, Point p2) {
+		private static List<Point> VerticeOnRight(Collection<Point> points, Point p1, Point p2) {
 			List<Point> m = new ArrayList<Point>();
 			int a = p2.y - p1.y;
 			int b = p1.x - p2.x;
@@ -137,16 +132,16 @@ public class ConvexHull {
 			conv.addAll(VerticeOnRight(m, maxP, p2));
 			return conv;
 		}
-	}
 
-	/**
-	 * 
-	 * @param a
-	 * @param b
-	 * @return the square of distance between a and b
-	 */
-	private static int distsqr(Point a, Point b) {
-		return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+		/**
+		 * 
+		 * @param a
+		 * @param b
+		 * @return the square of distance between a and b
+		 */
+		private static int distsqr(Point a, Point b) {
+			return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+		}
 	}
 
 }
